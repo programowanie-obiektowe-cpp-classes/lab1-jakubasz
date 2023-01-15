@@ -1,27 +1,50 @@
 #include <iostream>
+#include <cmath>
+#include <vector>
 using namespace std;
-
 class Wektor2D
 {
-public:
-    Wektor2D() : mx(0.0), my(0.0) { cout << "d" << endl; }
-    Wektor2D(double x, double y) : mx(x), my(y) { cout << "p" << endl; }
-    Wektor2D(const Wektor2D& w) : mx(w.mx), my(w.my) { cout << "c" << endl; }
-
-    double getX() const { return mx;}
-    double getY() const { return my;}
-    void   setX(double x) { mx = x; }
-    void   setY(double y) { my = y; }
-
-    void copy(const Wektor2D& w); 
-    void print() { cout << mx << " " << my << endl; }
-   
-    Wektor2D operator+(const Wektor2D& w);
-
-private:
-    double mx;
-    double my;
-
+    // Tutaj napisz implementacje klasy Wektor2D
+ public: 
+    Wektor2D() 
+    {
+        xCoord=0.0;
+        yCoord=0.0;
+    }
+    Wektor2D(double xx, double yy)
+    {
+        xCoord=xx;
+        yCoord=yy;
+    }
+    void setX(double aa) {xCoord=aa;};
+    double getX() {return xCoord;};
+    void setY(double aa) {yCoord=aa;};
+    double getY() {return yCoord;};
+    double x;
+    double y;
+ friend Wektor2D operator+(Wektor2D v1, Wektor2D v2)
+    {
+        return Wektor2D(v1.getX()+v2.getX(), v1.getY()+v2.getY());
+    }
+ friend double operator*(Wektor2D v1, Wektor2D v2)
+    {
+        return v1.getX()*v2.getX()+v1.getY()*v2.getY();
+    }
+ private:
+    double xCoord;
+    double yCoord;
 };
+/* int main()
+{
+Wektor2D v1{};           // Konstruktor domyślny, wektor o wsp. [0, 0]
+v1.setX(1.);             // setter
+v1.setY(1.);             // setter
+double x1 = v1.getX();   // getter
+double y1 = v1.getY();   // getter
 
-double operator*(const Wektor2D l, const Wektor2D p);
+Wektor2D v2{2., 2.}; // Konstruktor nadający współrzędne
+
+Wektor2D sum = v1 + v2; // dodawanie wektorów
+
+double prod = v1 * v2; // iloczyn skalarny
+} */
